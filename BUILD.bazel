@@ -1,0 +1,20 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/kelseyhightower/anthos-empathy-session
+gazelle(name = "gazelle")
+
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+
+k8s_objects(
+    name = "prod",
+    objects = [
+        "//bar:service_west",
+        "//bar:service_central",
+        "//foo:service_west",
+        "//foo:service_central",
+        "//bar:dev_west",
+        "//bar:dev_central",
+        "//foo:dev_west",
+        "//foo:dev_central",
+    ],
+)
